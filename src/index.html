@@ -9,16 +9,10 @@
 
   <title>Template</title>
 
-  <!-- http://www.jonathantneal.com/blog/understand-the-favicon/ -->
   <link rel="apple-touch-icon" href="images/touchicon.png">
-  <link rel="icon" href="images/favicon.png"">
-  <!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
-  <meta name="msapplication-TileColor" content="#FFFFFF">
-  <meta name="msapplication-TileImage" content="images/tileicon.png">
+  <link rel="icon" href="images/favicon.png">
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,600" rel="stylesheet">
-
-  <link rel="stylesheet" href="index.css" type="text/css">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-<ID>"></script>
@@ -32,8 +26,9 @@
 </head>
 
 <body>
-  <div class="fullscreen">
-    <div class="content">
+  <div class="content-wrapper">
+    <div class="content p-t-2 p-b-2">
+      <!-------------------------------- TEASER ------------------------------->
       <h1>
         <svg class="logo">
           <use
@@ -43,19 +38,6 @@
         Title
       </h1>
       <h2>Subtitle</h2>
-    </div>
-
-    <div class="bg"></div>
-
-    <video autoplay loop poster="assets/images/satori-short-first-frame.jpg" class="bg-video">
-      <source src="assets/videos/satori-short.webm" type="video/webm">
-      <source src="assets/videos/satori-short.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="fullscreen-blocker"></div>
-  <div class="content-wrapper">
-    <div class="content p-t-2 p-b-2">
-      <!-------------------------------- TEASER ------------------------------->
       <figure id="fig-teaser"></figure>
       <p class="abstract larger m-b-2">Main description</p>
 
@@ -283,6 +265,29 @@
               <a href="https://github.com/ngehlenborg" target="_blank">ngehlenborg</a>
             </li>
           </ul>
+        </li>
+      </ol>
+
+      <!------------------------------ REFERENCES ----------------------------->
+      <h3 id="references" class="iconized underlined anchored">
+        <a href="#references" class="hidden-anchor">
+          <svg class="icon">
+            <use
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xlink:href="images/icons.svg#link"></use>
+          </svg>
+        </a>
+        <svg class="icon">
+          <use
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xlink:href="images/icons.svg#bookmark"></use>
+        </svg>
+        References
+      </h3>
+      <ol class="no-list-style large-spacing iconized">
+        <li id="ref-1" class="flex-c reference">
+          <span class="number">[1]</span>
+          <span class="flex-g-1">Fraser and Bickmore. (2017) Nuclear organization of the genome and the potential for gene regulation. <em>Nature</em>, 447, 7143, 413–417.</span>
         </li>
       </ol>
     </div>
