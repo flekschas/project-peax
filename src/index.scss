@@ -4,7 +4,39 @@
 @import 'styles/ratio';
 @import 'styles/transitions';
 
-* {
+/*
+ * -----------------------------------------------------------------------------
+ * Font definitions
+ * -----------------------------------------------------------------------------
+ */
+
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Overpass Light'), local('Overpass-Light'),
+    url('/fonts/overpass-v2-latin-300.woff2') format('woff2'),
+    url('/fonts/overpass-v2-latin-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Overpass ExtraBold'), local('Overpass-ExtraBold'),
+    url('/fonts/overpass-v2-latin-800.woff2') format('woff2'),
+    url('/fonts/overpass-v2-latin-800.woff') format('woff');
+}
+
+/*
+ * -----------------------------------------------------------------------------
+ * Global styles
+ * -----------------------------------------------------------------------------
+ */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -14,23 +46,15 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Overpass', sans-serif;
   line-height: 1;
-}
-
-body {
   background: $white;
-  color: $gray-dark;
+  color: $black;
   font-size: 16px;
-  font-fammily: sans-serif;
   font-weight: 300;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 h1, h2, h3 {
@@ -71,7 +95,7 @@ h1 + h2 {
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .content h3:first-child {
@@ -79,8 +103,8 @@ h3 {
 }
 
 h4 {
-  margin: 1.5rem 0 0.5rem 0;
-  font-size: 1.5rem;
+  margin: 1.5rem 0 0.125rem 0;
+  font-size: 1.125rem;
 }
 
 h5 {
@@ -365,7 +389,7 @@ h5.iconized {
 }
 
 h3.iconized {
-  height: 3rem;
+  height: 2.25rem;
 }
 
 h4.iconized {
@@ -753,8 +777,8 @@ ul.iconized {
   }
 
   .content {
-    margin-left: 11.1112%;  /* 1/9 */
-    margin-right: 11.1112%;
+    margin-left: 16.6667%;  /* 1/6 */
+    margin-right: 16.6667%;
   }
 
   .video {
@@ -781,8 +805,8 @@ ul.iconized {
   }
 
   .content {
-    margin-left: 16.6667%;  /* 1/6 */
-    margin-right: 16.6667%;
+    margin-left: 20%;  /* 1/5 */
+    margin-right: 20%;
   }
 
   .fullscreen {
@@ -810,7 +834,8 @@ ul.iconized {
   }
 
   .content {
-    margin-left: 20%;  /* 1/5 */
-    margin-right: 20%;
+    max-width: 960px;
+    margin-left: auto;  /* 1/5 */
+    margin-right: auto;
   }
 }
