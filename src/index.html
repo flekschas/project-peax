@@ -3,43 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="author" content="Fritz Lekschas">
-  <meta name="description" content="Description">
-  <meta name="keywords" content="Key words, key words, ...">
+  <meta name="description" content="A tool for interactive visual pattern search in sequential data">
+  <meta name="keywords" content="Visual pattern search, pattern matching, sequential data, time series, epigenomics, convolutional autoencoder, unsupervised representation learning">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Template</title>
+  <!-- Schema.org markup for Google+ -->
+  <meta itemprop="name" content="Peax">
+  <meta itemprop="description" content="A tool for interactive visual pattern search in sequential data">
+  <meta itemprop="image" content="http://peax.lekschas.de/images/teaser.png">
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@flekschas">
+  <meta name="twitter:title" content="Peax">
+  <meta name="twitter:description" content="A tool for interactive visual pattern search in sequential data">
+  <meta name="twitter:creator" content="@flekschas">
+  <meta name="twitter:image:src" content="http://peax.lekschas.de/images/teaser.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Peax" />
+  <meta property="og:description" content="A tool for interactive visual pattern search in sequential data" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://github.com/Novartis/peax" />
+  <meta property="og:image" content="http://peax.lekschas.de/images/teaser.png" />
+
+  <title>Peax</title>
 
   <link rel="apple-touch-icon" href="images/touchicon.png">
   <link rel="icon" href="images/favicon.png">
-
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,600" rel="stylesheet">
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-<ID>"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-<ID>');
-  </script>
 </head>
 
 <body>
+  <div id="logo">
+    <div id="logo-track">
+      <svg></svg>
+    </div>
+    <svg id="logo-magnifier">
+      <use
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xlink:href="images/icons.svg#magnifier"></use>
+    </svg>
+    <div class="content">
+      <div id="logo-name"><span>Peax</span></div>
+    </div>
+  </div>
   <div class="content-wrapper">
     <div class="content p-t-2 p-b-2">
       <!-------------------------------- TEASER ------------------------------->
-      <h1>
-        <svg class="logo">
-          <use
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            xlink:href="images/icons.svg#refinery"></use>
-        </svg>
-        Title
-      </h1>
-      <h2>Subtitle</h2>
+      <h1>Interactive visual pattern search in sequential data using unsupervised deep representation learning</h1>
       <figure id="fig-teaser"></figure>
-      <p class="abstract larger m-b-2">Main description</p>
+      <p class="abstract larger m-b-2">
+        We present Peax, a novel feature-based technique for interactive visual pattern search in sequential data, like time series or data mapped to a genome sequence.
+        Visually searching for patterns by similarity is often challenging because of the large search space, the visual complexity of patterns, and the user's perception of similarity.
+        For example, in genomics, researchers try to link patterns in multivariate sequential data to fundamental cellular or pathogenic processes, but a lack of ground truth and high variance makes automatic pattern detection unreliable.
+        We have developed a convolutional autoencoder for unsupervised representation learning of regions in sequential data that can capture more visual details of complex patterns compared to existing similarity measures.
+        Using this learned representation as features of the sequential data, our accompanying visual query system enables interactive feedback-driven adjustments of the pattern search to adapt to the users' perceived similarity.
+        While users label regions as either matching their search target or not, a random forest classifier learns to weigh the importance of different dimensions of the learned representation.
+        We employ an active learning sampling strategy to focus the labeling process on regions that will improve the classifier in subsequent training.
+        Peax is open-source, customizable, and we demonstrate its features through an extensive case study in genomics. Moreover, we report on the ability of our autoencoder models to capture visual features and evaluate the effectiveness of the learned representation for similarity search in two user studies. We show that our models retrieve significantly more similar patterns than other commonly used techniques.
+      </p>
 
       <!------------------------------ SCREENCAST ----------------------------->
       <h3 id="screencast" class="iconized underlined anchored">
@@ -297,10 +319,12 @@
               xmlns:xlink="http://www.w3.org/1999/xlink"
               xlink:href="images/icons.svg#harvard-hms"></use>
           </svg>
+          <svg class="logo-novartis">
+            <use
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xlink:href="images/icons.svg#novartis"></use>
+          </svg>
         </div>
-        <p class="centered m-t-1 copyright">
-        Copyright &copy; 2017 the President and Fellows of Harvard College. All content on this website is licensed under the <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">Creative Commons Attribution license (CC BY)</a>. Copyright of the linked papers is with the publishers.
-        </p>
       </div>
       <div id="more-at-lekschas-de" class="flex-c flex-jc-c">
         <a href="https://lekschas.de/research">More Projects by Fritz Lekschas</a>

@@ -9,6 +9,19 @@ $gray-light: #bbb;
 $gray-lighter: #ddd;
 $gray-lightest: #f2f2f2;
 
-$primary: #214050;
-$secondary: #9e0927;
-$ternary: #CD9F53;
+$blue: #0f5d92;
+$blue-darker: adjust-color($blue, $saturation: -66%, $lightness: -15%);
+$blue-dark: adjust-color($blue, $saturation: -25%, $lightness: -10%);
+$blue-light: adjust-color($blue, $saturation: -20%, $lightness: 60%);
+$blue-highlight: adjust-color($blue, $saturation: 100%, $lightness: 25%);
+$pink: #cc168c;
+$pink-dark: adjust-color($pink, $saturation: -25%, $lightness: -10%);
+$pink-light: adjust-color($pink, $saturation: -20%, $lightness: 45%);
+$red-dark: #a1112d;
+$red-light: #ffccd6;
+$yellow: #e59f00;
+$yellow-dark: #805d0e;
+$yellow-light: #f2e7ce;
+
+$primary: $blue;
+$secondary: $pink;

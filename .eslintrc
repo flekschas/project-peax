@@ -13,5 +13,9 @@
     "ecmaVersion": 6
   },
   "plugins": [],
-  "rules": {}
+  "rules": {
+    "no-continue": 0,
+    "no-plusplus": 0,
+    "prefer-destructuring": 0,
+  }
 }
