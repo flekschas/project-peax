@@ -66,22 +66,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  color: $gray-darker;
-  margin: 4rem 0 0.5rem 0;
-}
-
 h1, h2, h3, h4, h5, h6, p, li {
+  color: $black;
   line-height: 1.5;
   transition: font-size $normal $ease;
 }
 
+h1, h2, h3 {
+  margin: 4rem 0 0.5rem 0;
+  font-weight: 900;
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+}
+
 h1 {
+  margin: 0 0 1rem 0;
   font-size: 2rem;
   font-weight: 900;
-  margin: 0;
-  color: $black;
-  line-height: 1;
+  line-height: 1.25;
 }
 
 h2 {
@@ -89,7 +93,6 @@ h2 {
 }
 
 h1 + h2 {
-  color: transparentize($black, 0.2);
   margin-top: 1rem;
   margin-bottom: 2rem;
   line-height: 1.2;
@@ -126,11 +129,7 @@ a {
   transition: all $fast $ease;
 }
 
-a:hover {
-  color: $black;
-  box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 1);
-}
-
+a:hover,
 a:focus {
   color: $secondary;
   background: transparentize($secondary, 0.9);
@@ -236,22 +235,48 @@ svg.centered {
   text-align: justify;
 }
 
+.coming-soon {
+  height: 8rem;
+  color: $gray-medium;
+  border: 1px solid $gray-lighter;
+  border-radius: 0.25rem;
+}
+
 .hidden-anchor {
   position: absolute;
   display: block;
   box-sizing: content-box;
   top: 0;
-  left: -2rem;
+  left: -1.75rem;
   bottom: 0;
   width: 0.5em;
-  padding: 0 1.5rem 0 0.25rem;
+  padding: 0 1.25rem 0 0.25rem;
   opacity: 0.66;
   transform: scale(0);
   transition: all $fast $ease;
   box-shadow: none !important;
   cursor: pointer;
 
+  &:hover,
+  &:focus {
+    color: $black;
+    background: none;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    display: block;
+    top: 0;
+    right: 1rem;
+    bottom: 0;
+    left: 0;
+  }
+
   > .icon {
+    position: relative;
+    z-index: 1;
     height: 100%;
     width: 100%;
   }
@@ -268,28 +293,33 @@ h3:target .hidden-anchor {
 }
 
 h3:target  {
-  color: $black;
-  background: transparentize($secondary, 0.9);
+  color: $blue-dark;
+  background: transparentize($primary, 0.9);
+  border-radius: 0 0.25rem 0.25rem 0;
 
   &:before {
     position: absolute;
     content: '';
     top: 0;
     bottom: 0;
-    left: -2rem;
-    width: 2rem;
-    background: transparentize($secondary, 0.9);
+    left: -1.75rem;
+    width: 1.75rem;
+    background: transparentize($primary, 0.9);
   }
 
   &.underlined:after {
-    left: -2rem;
-    background: $secondary;
+    left: -1.5rem !important;
+    background: $primary;
+    border-radius: 0 0 0.25rem 0;
   }
 
   .hidden-anchor {
-    padding-right: 0.25rem;
     color: $white;
-    background: $secondary;
+
+    &:after {
+      background: $primary;
+      border-radius: 0.25rem 0 0 0.25rem;
+    }
   }
 }
 
@@ -344,9 +374,9 @@ ol.large-spacing li {
     position: absolute;
     display: block;
     content: '';
-    bottom: -1px;
+    bottom: 0;
     left: -1rem;
-    right: -1rem;
+    right: 0;
     height: 2px;
     background: $gray-lighter;
     transition: left $fast $ease;
@@ -445,20 +475,6 @@ ul.iconized {
   display: block;
   font-size: 0.85em;
   color: $gray-medium;
-}
-
-.video {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 .reference {
@@ -630,6 +646,10 @@ ul.iconized {
   animation-delay: 0.2s;
 }
 
+.animation-duration-02 {
+  animation-duration: 0.2s;
+}
+
 .animation-duration-05 {
   animation-duration: 0.5s;
 }
@@ -655,7 +675,7 @@ ul.iconized {
 #logo {
   position: relative;
   width: 100%;
-  height: 4.25rem;
+  height: 5.25rem;
   overflow: hidden;
 
   .content {
@@ -669,7 +689,7 @@ ul.iconized {
   z-index: 0;
   top: 1.5rem;
   right: 0;
-  bottom: 0.75rem;
+  bottom: 1.75rem;
   left: 0;
   border-bottom: 1px solid $gray-light;
 
@@ -713,7 +733,15 @@ ul.iconized {
   width: 3rem;
   height: 3rem;
   opacity: 0;
-  transition: opacity $slow $ease;
+  transition: opacity $normal $ease;
+}
+
+#logo-magnifier-pos {
+  position: relative;
+  top: 0;
+  left: -3.5rem;
+  width: 3rem;
+  height: 4.25rem;
 }
 
 #logo-name {
@@ -738,14 +766,27 @@ ul.iconized {
   }
 }
 
+#logo-tooltip {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  height: 1rem;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  opacity: 0.5;
+}
+
 #fig-teaser {
   @include ratio(2367, 783);
+
+  margin: 1rem 0 1.5rem;
   background: url(images/teaser.png) no-repeat center center;
   background-size: cover;
 }
 
 #authors-list h4 + p {
-  margin-top: -0.25rem;
+  margin: -0.25rem 0 0;
 }
 
 #footer {
@@ -800,25 +841,41 @@ ul.iconized {
   #more-at-lekschas-de {
     margin-top: 2rem;
     padding: 0.75rem 0;
+    color: $gray-medium;
     background: $gray-lightest;
+    box-shadow: none;
 
-    a {
-      color: $gray-medium;
-      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0);
-
-      &:hover,
-      &:focus,
-      &:active {
-        color: $secondary;
-        box-shadow: 0 1px 0 0 $secondary;
-      }
+    &:hover,
+    &:focus,
+    &:active {
+      color: $secondary;
+      background: transparentize($secondary, 0.9);
+      box-shadow: none;
     }
   }
 }
 
-#youtube {
-  @include ratio(3360, 2100);
+#video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+// #video {
+//   @include ratio(3360, 2100);
+
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+
+//   iframe {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
 
 /*
  * -----------------------------------------------------------------------------
@@ -826,32 +883,14 @@ ul.iconized {
  * -----------------------------------------------------------------------------
  */
 
-/* 400px */
-@media screen and (min-width: 25em) {
-  h1 {
-    font-size: 2rem;
-  }
-}
-
-/* 568px (Pure.css Grid: SM) */
-@media screen and (min-width: 35.5em) {
-  h1 {
-    font-size: 3rem;
-  }
-}
-
 /* 640px */
 @media screen and (min-width: 40em) {
-  h1 {
-    font-size: 3.5rem;
-  }
-
   .content {
     margin-left: 8.3334%;  /* 1/12 */
     margin-right: 8.3334%;
   }
 
-  .video {
+  #video {
     width: 90%;
   }
 }
@@ -859,7 +898,7 @@ ul.iconized {
 /* 960px */
 @media screen and (min-width: 60em) {
   h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .content {
@@ -867,7 +906,7 @@ ul.iconized {
     margin-right: 16.6667%;
   }
 
-  .video {
+  #video {
     width: 80%;
   }
 
@@ -886,6 +925,10 @@ ul.iconized {
 
 /* 1280px */
 @media screen and (min-width: 80em) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
   .content {
     margin-left: 20%;  /* 1/5 */
     margin-right: 20%;
@@ -896,7 +939,7 @@ ul.iconized {
     margin-right: -33.334%;
   }
 
-  .video {
+  #video {
     width: 70%;
   }
 
