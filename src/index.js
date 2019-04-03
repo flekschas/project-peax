@@ -12,6 +12,20 @@ const logoMagnifierPos = document.querySelector('#logo-magnifier-pos');
 const logoContent = document.querySelector('#logo .content');
 const logoTooltip = document.querySelector('#logo-tooltip');
 
+const createIcon = (id) => {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', `icon icon-${id}`);
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttributeNS(
+    'http://www.w3.org/1999/xlink',
+    'href',
+    `images/icons.svg#${id}`,
+  );
+
+  svg.appendChild(use);
+  return svg;
+};
+
 const animationsDuration = ['05', '06', '07', '08'];
 const animationsDelays = ['000', '005', '010', '015', '020'];
 
@@ -36,14 +50,18 @@ const peakFreq = 8;
 const binSizes = [4, 5, 6];
 
 const timeouts = {};
-const initAndAnimate = (callback, firstTime) => {
+let bunnies = [];
+const initAndAnimate = (callback, firstTime, isBunnies) => {
   // Reset timeouts
   Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
   // Reset bins
   Array.prototype.forEach.call(logoTrack.children, (bin) => {
     bin.setAttribute('height', 0);
-    bin.setAttribute('class', 'animration-duration-02');
+    bin.setAttribute('class', 'animation-duration-02');
   });
+  // Reset bunnies
+  bunnies.forEach(bunny => bunny.remove());
+  bunnies = [];
 
   logo.insertBefore(logoMagnifier, logoContent);
 
@@ -94,19 +112,37 @@ const initAndAnimate = (callback, firstTime) => {
   // Add peaks
   bins = logoTrack.children;
   const updatePeak = (position) => {
-    const peak = peaks[Math.round(Math.random() * (peaks.length - 1))];
-    for (let j = 0; j < peaksPatchSize; j++) {
-      const variation = (
-        peakMaxVariation *
-        (Math.round(Math.random() * 4) / 4) *
-        (1 - (Math.round(Math.random()) * 2))
-      );
-      const binHeight =
-        Math.min(1, Math.max(0, (peak[j] + variation))) *
-        height *
-        (1 - (peakScaling * Math.random()));
-      bins[position + j].setAttribute('y', height - binHeight);
-      bins[position + j].setAttribute('height', binHeight);
+    if (isBunnies) {
+      for (let j = 0; j < peaksPatchSize; j++) {
+        bins[position + j].setAttribute('y', height);
+        bins[position + j].setAttribute('height', 0);
+      }
+      const bunny = createIcon('bunny');
+      bunny.style.left = `${position * binSize}px`;
+      bunny.style.width = `${peaksPatchSize * binSize}px`;
+      bunny.style.height = `${peaksPatchSize * binSize}px`;
+      bunny.style.opacity = 0;
+      bunny.pos = position;
+      logo.append(bunny);
+      bunnies.push(bunny);
+      setTimeout(() => {
+        bunny.style.opacity = 1;
+      }, 0);
+    } else {
+      const peak = peaks[Math.round(Math.random() * (peaks.length - 1))];
+      for (let j = 0; j < peaksPatchSize; j++) {
+        const variation = (
+          peakMaxVariation *
+          (Math.round(Math.random() * 4) / 4) *
+          (1 - (Math.round(Math.random()) * 2))
+        );
+        const binHeight =
+          Math.min(1, Math.max(0, (peak[j] + variation))) *
+          height *
+          (1 - (peakScaling * Math.random()));
+        bins[position + j].setAttribute('y', height - binHeight);
+        bins[position + j].setAttribute('height', binHeight);
+      }
     }
   };
   const peaksToInsert = Math.min(
@@ -119,7 +155,7 @@ const initAndAnimate = (callback, firstTime) => {
     const position = Math.round(Math.random() * (viewWidth - peaksPatchSize));
 
     if (
-      position > viewNameLeft - viewNameWidth &&
+      position > viewNameLeft - viewNamePadding &&
       position < viewNameLeft + viewNameWidth + viewNamePadding
     ) continue;
 
@@ -135,7 +171,7 @@ const initAndAnimate = (callback, firstTime) => {
     const position = Math.round(Math.random() * (viewWidth - peaksPatchSize));
 
     if (
-      position > viewNameLeft - viewNameWidth &&
+      position > viewNameLeft - viewNamePadding &&
       position < viewNameLeft + viewNameWidth + viewNamePadding
     ) continue;
 
@@ -163,6 +199,14 @@ const initAndAnimate = (callback, firstTime) => {
     );
   }
 
+  const colorizeBunnies = (index) => {
+    if (index >= bunnies.length) return;
+    bunnies[index].setAttribute(
+      'class',
+      `${bunnies[index].getAttribute('class')} found`,
+    );
+  };
+
   const colorizePeaks = (position, isPositive) => {
     const name = isPositive ? 'peak' : 'no-peak';
     for (let j = 0; j < peaksPatchSize; j++) {
@@ -172,6 +216,8 @@ const initAndAnimate = (callback, firstTime) => {
       );
     }
   };
+
+  let fadedInBunnies = 0;
 
   // Fade in magnifier
   const leftShift = width < 960 ? 1 : 0;
@@ -184,7 +230,8 @@ const initAndAnimate = (callback, firstTime) => {
       }, 0);
     }
     timeouts[2] = setTimeout(() => {
-      colorizePeaks(viewNameLeft + 2, true);
+      if (isBunnies) colorizeBunnies(0);
+      else colorizePeaks(viewNameLeft + 2, true);
     }, 250);
 
     // Don't animate on tiny screens
@@ -196,6 +243,13 @@ const initAndAnimate = (callback, firstTime) => {
       ...negsPos.map(pos => ({ pos, isPos: false })),
     ];
     allPos.sort((a, b) => a.pos - b.pos);
+    if (bunnies.length) {
+      bunnies = [
+        bunnies[bunnies.length - 1],
+        ...bunnies.slice(0, bunnies.length - 1).sort((a, b) => a.pos - b.pos),
+      ];
+    }
+
     const duration = 0.666;
 
     timeouts[3] = setTimeout(() => {
@@ -208,7 +262,8 @@ const initAndAnimate = (callback, firstTime) => {
 
       logoMagnifier.style.transform = `translate(${binPos * binSize}px, 0)`;
       timeouts[4] = setTimeout(() => {
-        colorizePeaks(binPos + 2, isPos);
+        if (isBunnies && isPos) colorizeBunnies(++fadedInBunnies);
+        else colorizePeaks(binPos + 2, isPos);
       }, duration * 1000);
 
       if (typeof allPos[next] !== 'undefined') {
@@ -233,7 +288,7 @@ const initAndAnimate = (callback, firstTime) => {
 
 // Init
 initAndAnimate(() => {
-  logoTooltip.innerHTML = 'Hooray 🎉 Peax found all peaks! Hit <code>R</code> to find some more.';
+  logoTooltip.innerHTML = 'Hooray 🎉 Peax found all peaks! Click on the bars above to find some more.';
 }, true);
 
 const startMessages = [
@@ -242,22 +297,28 @@ const startMessages = [
   'You are pushing Peax to its limit!',
   'Can this really be true?',
   'If it works one more time&hellip;',
+  'Now it\'s starting to get boring&hellip;',
+  'Is anybody still awake?',
+  'You are truly the best visitor! You never give up. ❤️',
+  'Can Peax also find cute bunnies?!',
 ];
 const endMessages = [
-  'Wow! Peax did it again. Hit <code>R</code> for another round.',
-  'Magnificant! Peax always finds the peaks.',
+  'Wow! Peax did it again. Click above for another round.',
+  'Magnificent! Peax always finds the peaks.',
   'Unbelievable! As if Peax knows where the peaks are!',
-  'This must be some kind of trick? Right? Is Peax that good?',
+  'This must be some kind of trick? Right? Is Peax really that good?!',
   'Absolutely spectacular!1! What a peak-finding extravaganza!',
+  'I know&hellip; I know&hellip; Peax found all the peaks&hellip;',
+  'I can\'t believe Peax is still running strong. Doesn\'t Peax needs some rest too?',
+  'Your commitment does not go unnoticed. A peak shall be named after you!',
+  'Incredible! Peax is truly a jack of all trades. What else is left for future work?',
 ];
 const setMessage = (runtime, messages) => () => {
   logoTooltip.innerHTML = messages[runtime % messages.length];
 };
 let runtimes = 0;
-window.addEventListener('keyup', ({ keyCode }) => {
-  if (keyCode === 82) {
-    setMessage(runtimes, startMessages)();
-    initAndAnimate(setMessage(runtimes, endMessages));
-    runtimes++;
-  }
+logo.addEventListener('click', () => {
+  setMessage(runtimes, startMessages)();
+  initAndAnimate(setMessage(runtimes, endMessages), false, runtimes === 8);
+  runtimes++;
 });

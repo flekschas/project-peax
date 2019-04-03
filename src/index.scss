@@ -457,7 +457,6 @@ ul.iconized {
   width: 0.8em;
   height: 0.8em;
   line-height: 1.5em;
-  vertical-align: center;
 }
 
 // Also known as `social-links`. But anything containing `social` will be
@@ -624,6 +623,18 @@ ul.iconized {
     position: relative;
     height: 100%;
   }
+
+  .icon-bunny {
+    position: absolute;
+    bottom: 1.95rem;
+    color: $gray-medium;
+    opacity: 0;
+    transition: opacity $slow $ease;
+
+    &.found {
+      color: $primary;
+    }
+  }
 }
 
 #logo-track {
@@ -716,6 +727,12 @@ ul.iconized {
   font-size: 0.85rem;
   line-height: 0.85rem;
   opacity: 0.5;
+
+  .icon-inline {
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+  }
 }
 
 #fig-teaser {
