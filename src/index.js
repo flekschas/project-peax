@@ -31,7 +31,7 @@ const peaks = [
 const peaksPatchSize = 5;
 const peakMaxVariation = 0.2;
 const peakScaling = 0.5;
-const peakFreq = 10;
+const peakFreq = 8;
 
 const binSizes = [4, 5, 6];
 
@@ -171,9 +171,6 @@ const initAndAnimate = (callback, firstTime) => {
   };
 
   // Fade in magnifier
-  // if (logoMagnifier.style.opacity === 0) {
-  //   logoMagnifier.style.transform = `translate(${viewNameLeft * binSize}px, 0)`;
-  // }
   logoMagnifier.style.transform = `translate(${viewNameLeft * binSize}px, 0)`;
   timeouts[0] = setTimeout(() => {
     if (!logoMagnifier.style.opacity) {
@@ -185,6 +182,9 @@ const initAndAnimate = (callback, firstTime) => {
     timeouts[2] = setTimeout(() => {
       colorizePeaks(viewNameLeft + 2, true);
     }, 250);
+
+    // Don't animate on tiny screens
+    if (width < 480) return;
 
     // Animate magnifier
     const allPos = [
