@@ -36,13 +36,13 @@ const peakFreq = 10;
 const binSizes = [4, 5, 6];
 
 const timeouts = {};
-const initAndAnimate = (callback) => {
+const initAndAnimate = (callback, firstTime) => {
   // Reset timeouts
   Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
   // Reset bins
   Array.prototype.forEach.call(logoTrack.children, (bin) => {
     bin.setAttribute('height', 0);
-    bin.setAttribute('class', 'animation-duration-02');
+    bin.setAttribute('class', 'animration-duration-02');
   });
 
   logo.insertBefore(logoMagnifier, logoContent);
@@ -171,12 +171,17 @@ const initAndAnimate = (callback) => {
   };
 
   // Fade in magnifier
+  // if (logoMagnifier.style.opacity === 0) {
+  //   logoMagnifier.style.transform = `translate(${viewNameLeft * binSize}px, 0)`;
+  // }
   logoMagnifier.style.transform = `translate(${viewNameLeft * binSize}px, 0)`;
   timeouts[0] = setTimeout(() => {
-    logoMagnifier.style.transition = 'opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)';
-    timeouts[1] = setTimeout(() => {
-      logoMagnifier.style.opacity = 1;
-    }, 0);
+    if (!logoMagnifier.style.opacity) {
+      logoMagnifier.style.transition = 'opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      timeouts[1] = setTimeout(() => {
+        logoMagnifier.style.opacity = 1;
+      }, 0);
+    }
     timeouts[2] = setTimeout(() => {
       colorizePeaks(viewNameLeft + 2, true);
     }, 250);
@@ -218,14 +223,14 @@ const initAndAnimate = (callback) => {
         }, (duration * 1000) + 25);
       }
     };
-    timeouts[8] = setTimeout(() => animateTo(0, 1), 3000);
+    timeouts[8] = setTimeout(() => animateTo(0, 1), 1000 + (2000 * !!firstTime));
   }, 1000);
 };
 
 // Init
 initAndAnimate(() => {
   logoTooltip.innerHTML = 'Hooray 🎉 Peax found all peaks! Hit <code>R</code> to find some more.';
-});
+}, true);
 
 const startMessages = [
   'Here we go again!',
