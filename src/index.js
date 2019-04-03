@@ -109,7 +109,10 @@ const initAndAnimate = (callback, firstTime) => {
       bins[position + j].setAttribute('height', binHeight);
     }
   };
-  const peaksToInsert = Math.round(((width - nameWidth) / binSize) / peaksPatchSize / peakFreq);
+  const peaksToInsert = Math.min(
+    5,
+    Math.round(((width - nameWidth) / binSize) / peaksPatchSize / peakFreq),
+  );
   let peaksInserted = 0;
   const peaksPos = [];
   while (peaksInserted < peaksToInsert) {
@@ -171,7 +174,8 @@ const initAndAnimate = (callback, firstTime) => {
   };
 
   // Fade in magnifier
-  logoMagnifier.style.transform = `translate(${viewNameLeft * binSize}px, 0)`;
+  const leftShift = width < 960 ? 1 : 0;
+  logoMagnifier.style.transform = `translate(${(viewNameLeft - leftShift) * binSize}px, 0)`;
   timeouts[0] = setTimeout(() => {
     if (!logoMagnifier.style.opacity) {
       logoMagnifier.style.transition = 'opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)';
