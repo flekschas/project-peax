@@ -1,14 +1,14 @@
 {
-  "name": "template",
+  "name": "project-peax",
   "version": "0.1.0",
-  "description": "Template",
+  "description": "Project Peax",
   "private": true,
   "author": "Fritz Lekschas",
   "license": "MIT",
   "contributors": [
     {
       "name": "Fritz Lekschas",
-      "url": "http://github.com/flekschas"
+      "url": "http://github.com/flekschas/project-peax"
     }
   ],
   "devDependencies": {
