@@ -74,22 +74,32 @@
             xmlns:xlink="http://www.w3.org/1999/xlink"
             xlink:href="images/icons.svg#video"></use>
         </svg>
-        <span>Presentation &amp; Screencast</span>
+        <span>Screencast &amp; Presentation</span>
       </h3>
       <div class="flex-c">
-        <div class="slides-container">
+        <div id="video" class="slides-container">
           <iframe
-            id="slides"
+            src="https://www.youtube.com/embed/FlzTdFUVE-M"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div id="slides" class="slides-container">
+          <iframe
             class="slides"
             src="//speakerdeck.com/player/8fcdd26628b44f83bbe010363a5cf536"
             frameborder="0"
             scrolling="no">
           </iframe>
         </div>
-        <div class="slides-container">
-          <div id="video" class="flex-c flex-jc-c flex-a-c coming-soon">
-            <span>Screencast coming soon!</span>
-          </div>
+      </div>
+      <div class="flex-c">
+        <div class="slides-title-container">
+          Video Introduction
+        </div>
+        <div class="slides-title-container">
+          Slides from BioIT World 2019
         </div>
       </div>
 

@@ -541,9 +541,7 @@ ul.iconized {
   }
 }
 
-.slides-container {
-  @include ratio(10, 7);
-
+.slides-container, .slides-title-container {
   width: 50%;
   margin: 0.5rem;
   border-radius: 0.25rem;
@@ -555,6 +553,13 @@ ul.iconized {
   &:last-child {
     margin-right: 0;
   }
+}
+
+.slides-container {
+  @include ratio(10, 6);
+
+  overflow: hidden;
+  box-shadow: 0 0 0 1px black;
 
   > * {
     position: absolute;
@@ -565,6 +570,10 @@ ul.iconized {
     border: 0;
     border-radius: 0.25rem;
   }
+}
+
+.slides-title-container {
+  text-align: center;
 }
 
 .journal {
@@ -840,21 +849,14 @@ ul.iconized {
   }
 }
 
-// #video {
-//   @include ratio(3360, 2100);
+#slides {
+  box-shadow: 0 0 0 1px $black;
+  background: $black;
+}
 
-//   display: block;
-//   margin-left: auto;
-//   margin-right: auto;
-
-//   iframe {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//   }
-// }
+#video {
+  box-shadow: 0 0 0 1px $gray-lighter;
+}
 
 /*
  * -----------------------------------------------------------------------------
