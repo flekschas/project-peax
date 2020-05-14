@@ -59,7 +59,6 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              minimize: { safe: true },
               url: false,
             },
           },
@@ -69,12 +68,6 @@ module.exports = {
               plugins: () => [
                 postcssFlexbugsFixes,
                 autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9',
-                  ],
                   flexbox: 'no-2009',
                 }),
               ],
