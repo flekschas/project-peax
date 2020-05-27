@@ -496,10 +496,20 @@ ul.iconized {
     margin-top: 0.125rem;
 
     li {
-      padding: 0 0.25em;
+      padding: 0.125em 0.375em;
       font-size: 0.85em;
       text-transform: uppercase;
       border-radius: 0.125rem;
+    }
+  }
+
+  .award {
+    color: $black;
+    background: $yellow;
+
+    .icon {
+      width: 1em;
+      height: 1em;
     }
   }
 
