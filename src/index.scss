@@ -566,7 +566,7 @@ ul.iconized {
 }
 
 .slides-container {
-  @include ratio(10, 6);
+  @include ratio(10, 6.5);
 
   overflow: hidden;
   box-shadow: 0 0 0 1px black;
